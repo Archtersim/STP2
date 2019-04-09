@@ -192,7 +192,7 @@ void Calculator::on_pushButton_23_clicked()
 void Calculator::on_pushButton_28_clicked()
 {
     //pNumberController.Proc.Rop.Notation=ui->horizontalSlider->value();
-    if(pNumberController.Proc.Lop_Res.Number>100000000||pNumberController.Proc.Rop.Number>100000000)
+    if(pNumberController.Proc.Operation!=Oper::None&& pNumberController.Proc.Lop_Res.Number>100000000||pNumberController.Proc.Rop.Number>100000000)
     {   TPNumber a(pNumberController.Proc.Lop_Res.Number,ui->horizontalSlider->value(),5);
         ui->lineEdit_2->setText(a.ToString());
         qDebug()<<"overflow";
@@ -219,7 +219,13 @@ void Calculator::on_pushButton_20_clicked()
 
 void Calculator::on_pushButton_30_clicked()
 {
+
     //pNumberController.Proc.Rop.Notation=ui->horizontalSlider->value();
+    if(pNumberController.Proc.Lop_Res.Number>100000000||pNumberController.Proc.Rop.Number>100000000)
+    {   TPNumber a(pNumberController.Proc.Rop.Number,ui->horizontalSlider->value(),5);
+        ui->lineEdit_2->setText(a.ToString());
+        qDebug()<<"overflow";
+        return;}
     ui->lineEdit_2->setText( pNumberController.ExecFunction(Func::Sqr));
 }
 

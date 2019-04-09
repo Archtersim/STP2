@@ -13,8 +13,9 @@ class PNumberEditor : public AEditor {
 
  public: double Notation;
  public: double Precision;
-       int LeftSideOnlyLimit = 12;
-       int BothSideLimit = 22;
+       //int LeftSideOnlyLimit = 8;
+       int LeftSideOnlyLimit[17]={0,0,10,9,8,7,6,6,6,6,6,6,6,5,5,5,4};
+       int BothSideLimit = 16;
  public:
 
 
@@ -82,7 +83,7 @@ public: PNumberEditor(double num, int notat, int pre) {
       public: QString AddNumber(int num) {
            qDebug()<<number<<"add";
            TPNumber::Conver_10_p a;
-          if (!HaveSeparator() && number.length() > LeftSideOnlyLimit)
+          if (!HaveSeparator() && number.length() > LeftSideOnlyLimit[(int)Notation])
               return number;
           else if (number.length() > BothSideLimit)
               return number;
