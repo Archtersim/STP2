@@ -6,6 +6,7 @@
 #include "QRegExp"
 #include "QRegularExpression"
 #include "QDebug"
+#include "math.h"
 class TComplex : public ANumber {
     public: double Real;
     public: double Imaginary;

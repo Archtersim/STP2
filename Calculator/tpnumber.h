@@ -4,6 +4,7 @@
 //#include "tnumber.h"
 #include "QString"
 #include "QDebug"
+#include "math.h"
 class TPNumber : public ANumber {
 public:
 //TPNumber();
