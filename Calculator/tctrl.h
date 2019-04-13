@@ -24,6 +24,8 @@
      public: TProc<T> Proc ;
      public: TMemory<T> Memory ;
      public: Editor Edit ;
+     struct recordofhistory {QString op;QString op1;QString op2;QString result;};
+     QVector <recordofhistory> hist;
 
      public:
         TCtrl() {
@@ -122,7 +124,18 @@
                     Proc.Rop = Proc.Lop_Res;
                     Proc.Operation = Oper::None;
                 }
+
+                recordofhistory record;
+                if(func==Func::Sqr)record.op="Sqr";
+                if(func==Func::Rev)record.op="Rev";
+                record.op1="_";
+                record.op2=Proc.Rop.ToString();
+
+
+
                 Proc.DoFunc(func);
+                record.result=Proc.Rop.ToString();
+                hist.push_back(record);
                 CurState = TCtrlState::FunDone;
 
                 ToReturn = Proc.Rop.ToString();
@@ -137,7 +150,18 @@
 
                 if (CurState == TCtrlState::cStart)
                     Proc.Lop_Res = Proc.Rop;
+
+                recordofhistory record;
+                if(Proc.Operation==Oper::Add)record.op="Add";
+                if(Proc.Operation==Oper::Sub)record.op="Sub";
+                if(Proc.Operation==Oper::Mul)record.op="Mul";
+                if(Proc.Operation==Oper::Div)record.op="Div";
+                record.op1=Proc.Lop_Res.ToString();
+                record.op2=Proc.Rop.ToString();
+
                 Proc.DoOper();
+                record.result=Proc.Lop_Res.ToString();
+                 hist.push_back(record);
                 CurState = TCtrlState::cExpDone;
                 CurState = TCtrlState::cExpDone;
                 ToReturn = Proc.Lop_Res.ToString();

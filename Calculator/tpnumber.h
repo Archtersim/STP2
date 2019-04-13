@@ -18,14 +18,14 @@ double Precision;
 TPNumber() {
    Number =  0;
    Notation =  ((double)10);
-   Precision =  ((double)5);
+   Precision =  ((double)10);
 }
 
 TPNumber(double num, double notat, double pre) {
    if (notat < 2 || notat > 16 || pre < 0 || pre > 10) {
        Number =  0;
        Notation =  ((double)10);
-       Precision =  ((double)5);
+       Precision =  ((double)10);
    }
    else {
        Number =  (num);
@@ -182,7 +182,7 @@ public:
                         QString PNumber = "";
 
                         while (n > 0) {
-                            PNumber.push_front(int_to_Char((int)(n % p)));
+                            PNumber.push_front(int_to_Char((long long)(n % p)));
                             n /= p;
                         }
 
@@ -206,8 +206,8 @@ public:
                        QString PNumber = "";
                        for (int i = 0; i < c; ++i) {
 
-                           PNumber += int_to_Char((int)(n * p));
-                           n = n * p - (int)(n * p);
+                           PNumber += int_to_Char((long long)(n * p));
+                           n = n * p - (long long)(n * p);
                        }
                        PNumber.remove(QRegExp("[0]*$"));
                        return PNumber;
@@ -244,6 +244,9 @@ public:
 
                         for (int i = 0; i < P_num.length(); i++)
                         {
+                            //double cppsuck=1;
+                            //if(Degree>0)for(int j=0;j<Degree;j++)cppsuck*=P;
+                            //if(Degree<0)for(int j=0;j>Degree;j--)cppsuck/=P;
                             Result += char_To_num(P_num[i]) * pow(P, Degree);
                             Degree--;
                         }

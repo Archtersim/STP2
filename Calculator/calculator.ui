@@ -5993,6 +5993,7 @@
     <property name="title">
      <string>Меню</string>
     </property>
+    <addaction name="action_history"/>
     <addaction name="action_exit"/>
    </widget>
    <widget class="QMenu" name="menu_2">
@@ -6027,6 +6028,11 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+A</string>
+   </property>
+  </action>
+  <action name="action_history">
+   <property name="text">
+    <string>История</string>
    </property>
   </action>
  </widget>

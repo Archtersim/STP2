@@ -185,7 +185,7 @@ void Calculator::on_pushButton_2_clicked()
 
 void Calculator::on_pushButton_23_clicked()
 {
-    //pNumberController.Proc.Rop.Notation=ui->horizontalSlider->value();
+    pNumberController.Proc.Rop.Notation=ui->horizontalSlider->value();
     ui->lineEdit_2->setText( pNumberController.ExecOperation(Oper::Add));
 }
 
@@ -197,23 +197,25 @@ void Calculator::on_pushButton_28_clicked()
         ui->lineEdit_2->setText(a.ToString());
         qDebug()<<"overflow";
         return;}
+    pNumberController.Proc.Rop.Notation=ui->horizontalSlider->value();
     ui->lineEdit_2->setText(pNumberController.Calculate());
 }
 
 void Calculator::on_pushButton_22_clicked()
 {
-    //pNumberController.Proc.Rop.Notation=ui->horizontalSlider->value();
+    pNumberController.Proc.Rop.Notation=ui->horizontalSlider->value();
     ui->lineEdit_2->setText( pNumberController.ExecOperation(Oper::Sub));
 }
 
 void Calculator::on_pushButton_21_clicked()
 {
+    pNumberController.Proc.Rop.Notation=ui->horizontalSlider->value();
     ui->lineEdit_2->setText( pNumberController.ExecOperation(Oper::Mul));
 }
 
 void Calculator::on_pushButton_20_clicked()
 {
-    //pNumberController.Proc.Rop.Notation=ui->horizontalSlider->value();
+    pNumberController.Proc.Rop.Notation=ui->horizontalSlider->value();
     ui->lineEdit_2->setText( pNumberController.ExecOperation(Oper::Div));
 }
 
@@ -251,8 +253,10 @@ void Calculator::on_pushButton_26_clicked()
 
 void Calculator::on_pushButton_24_clicked()
 {
-    TPNumber a(QString::number(pNumberController.ExecCommandMemory(Commands::Copy,"3").first.Number),10,5);
-    pNumberController.Edit.number=TPNumber::Conver_10_p::int_to_P(a.Number,ui->horizontalSlider->value());
+    TPNumber a(QString::number(pNumberController.ExecCommandMemory(Commands::Copy,"3").first.Number),10,15);
+    //pNumberController.Edit.number=TPNumber::Conver_10_p::int_to_P(a.Number,ui->horizontalSlider->value());
+   a.Notation=ui->horizontalSlider->value();
+    pNumberController.Edit.number=a.ToString();
     ui->lineEdit_2->setText(pNumberController.Edit.number);//MR
     if(pNumberController.Memory.FState==ON) ui->lineEdit_3->setText("M");
             else ui->lineEdit_3->setText("");
@@ -656,4 +660,77 @@ void Calculator::on_tabWidget_currentChanged(int index)
     if(index==1){ui->tabWidget->resize(350,430); this->resize(400,480);}
     if(index==2){ui->tabWidget->resize(500,500); this->resize(550,550);}
 
+}
+
+void Calculator::on_action_history_triggered()
+{
+    if(pNumberController.hist.size()==0){
+        QMessageBox messageBox;
+        messageBox.critical(0,"Warning","History is empty !");
+        messageBox.setFixedSize(500,200);
+        return;
+        }
+
+       QStandardItemModel *model = new QStandardItemModel;
+
+    QStandardItem *resultitem,* operanditem,* operator1item,* operator2item;
+
+
+        if(ui->tabWidget->QTabWidget::currentIndex()==0)
+        for(int i=0; i<pNumberController.hist.size(); i++)
+        {
+
+             operator1item = new QStandardItem(pNumberController.hist[i].op1);
+              model->setItem(i, 0, operator1item);
+              operanditem = new QStandardItem(pNumberController.hist[i].op);
+               model->setItem(i, 1, operanditem);
+              operator2item = new QStandardItem(pNumberController.hist[i].op2);
+               model->setItem(i, 2, operator2item);
+               resultitem = new QStandardItem(pNumberController.hist[i].result);
+                model->setItem(i, 3, resultitem);
+               model->setHeaderData(i,Qt::Vertical,i+1);
+        }
+        if(ui->tabWidget->QTabWidget::currentIndex()==1)
+        for(int i=0; i<fracController.hist.size(); i++)
+        {
+
+             operator1item = new QStandardItem(fracController.hist[i].op1);
+              model->setItem(i, 0, operator1item);
+              operanditem = new QStandardItem(fracController.hist[i].op);
+               model->setItem(i, 1, operanditem);
+              operator2item = new QStandardItem(fracController.hist[i].op2);
+               model->setItem(i, 2, operator2item);
+               resultitem = new QStandardItem(fracController.hist[i].result);
+                model->setItem(i, 3, resultitem);
+               model->setHeaderData(i,Qt::Vertical,i+1);
+        }
+        if(ui->tabWidget->QTabWidget::currentIndex()==2)
+        for(int i=0; i<complexController.hist.size(); i++)
+        {
+
+             operator1item = new QStandardItem(complexController.hist[i].op1);
+              model->setItem(i, 0, operator1item);
+              operanditem = new QStandardItem(complexController.hist[i].op);
+               model->setItem(i, 1, operanditem);
+              operator2item = new QStandardItem(complexController.hist[i].op2);
+               model->setItem(i, 2, operator2item);
+               resultitem = new QStandardItem(complexController.hist[i].result);
+                model->setItem(i, 3, resultitem);
+               model->setHeaderData(i,Qt::Vertical,i+1);
+        }
+
+         model->setHeaderData(0,Qt::Horizontal,"Оператор");
+          model->setHeaderData(1,Qt::Horizontal,"Операнд");
+           model->setHeaderData(2,Qt::Horizontal,"Операнд2");
+           model->setHeaderData(3,Qt::Horizontal,"Результат");
+
+           QTableView *HistoryTable = new QTableView;
+
+
+        HistoryTable->setModel(model);
+        HistoryTable->setFixedHeight(HistoryTable->verticalHeader()->length()+50);
+        HistoryTable->setFixedWidth(HistoryTable->horizontalHeader()->length()+50);
+        HistoryTable->resizeRowsToContents();
+        HistoryTable->resizeColumnsToContents();
+        HistoryTable->show();
 }

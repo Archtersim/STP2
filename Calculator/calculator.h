@@ -224,6 +224,8 @@ private slots:
 
     void on_tabWidget_currentChanged(int index);
 
+    void on_action_history_triggered();
+
 private:
     Ui::Calculator *ui;
 };

@@ -26,14 +26,14 @@ class PNumberEditor : public AEditor {
       PNumberEditor() {
           number = "0";
           Notation = (10);
-          Precision = (5);
+          Precision = (10);
       }
  public:
       PNumberEditor(QString str, double notat, double pre) {
           if (notat < 2 || notat > 16 || pre < 0 || pre > 10) {
               number = "0";
               Notation =  (10);
-              Precision =  (5);
+              Precision =  (10);
           }
           else {
               Notation = notat;
@@ -47,7 +47,7 @@ public: PNumberEditor(double num, int notat, int pre) {
           if (notat < 2 || notat > 16 || pre < 0 || pre > 10) {
               number = "0";
               Notation = (10);
-              Precision = (5);
+              Precision = (10);
           }
           else {
               Notation = (notat);
@@ -60,7 +60,7 @@ public: PNumberEditor(double num, int notat, int pre) {
  public:
       PNumberEditor(QString str) {
           Notation = (10);
-          Precision =  (5);
+          Precision =  (10);
           //number="6";
           number =  (TPNumber(str, Notation, Precision)).ToString();
       }
