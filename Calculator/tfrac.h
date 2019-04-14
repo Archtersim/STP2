@@ -34,6 +34,7 @@
                 Numerator = (a);
                 Denominator = (b);
                 long gcdResult = std::__gcd((long long)a, (long long)b);
+                if(gcdResult < 0)gcdResult*=-1;
                 if (gcdResult > 1) {
                     Numerator /= gcdResult;
                     Denominator /= gcdResult;
@@ -210,9 +211,9 @@
            return *this;
         }
         public:  ANumber& Reverse(void) {
-            long long tmp=Denominator;
-            Denominator=Numerator;
-            Numerator=tmp;
+            TFrac a(Denominator,Numerator);
+            Numerator=a.Numerator;
+            Denominator=a.Denominator;
             return  *this;
         }
         public:  bool IsZero() {

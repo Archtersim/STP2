@@ -37,14 +37,14 @@ int main(int argc, char *argv[])
 
      w.show();
 
-     //QTest::qExec(new testproc228,argc,argv);
-     //QTest::qExec(new testtpnumber,argc,argv);
-                    //QTest::qExec(new testtpnumbereditor,argc,argv);
-     //QTest::qExec(new testtcomplex,argc,argv);
-     //QTest::qExec(new testcomplexeditor,argc,argv);
-     //QTest::qExec(new testfrac,argc,argv);
-     //QTest::qExec(new testfraceditor,argc,argv);
-     //QTest::qExec(new testmemory,argc,argv);
+     QTest::qExec(new testproc228,argc,argv);
+     QTest::qExec(new testtpnumber,argc,argv);
+                    QTest::qExec(new testtpnumbereditor,argc,argv);
+     QTest::qExec(new testtcomplex,argc,argv);
+     QTest::qExec(new testcomplexeditor,argc,argv);
+     QTest::qExec(new testfrac,argc,argv);
+     QTest::qExec(new testfraceditor,argc,argv);
+     QTest::qExec(new testmemory,argc,argv);
     return a.exec();
 
 }

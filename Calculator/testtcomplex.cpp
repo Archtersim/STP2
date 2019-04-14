@@ -88,25 +88,26 @@ void testtcomplex:: Init1() {
      void testtcomplex:: GetRad1() {
         TComplex testClass =  TComplex(3, 4);
         double answer = 0.927295;
-        QCOMPARE(true,qFloatDistance(answer, testClass.GetRad())<(1<<8));
+         QCOMPARE(true,(abs(answer)-abs(testClass.GetRad())<0.000001));
     }
 
      void testtcomplex:: GetRad2() {
         TComplex testClass =  TComplex(0, -3);
         double answer = -1.570796;
-        QCOMPARE(true,qFloatDistance(answer, testClass.GetRad())<(1<<10));
+        QCOMPARE(true,(abs(answer)-abs(testClass.GetRad())<0.000001));
     }
 
      void testtcomplex:: GetDegree1() {
         TComplex testClass =  TComplex(3, 4);
         double answer = 53.1301;
-        QCOMPARE(true,qFloatDistance(answer, testClass.GetDegree())<(1<<10));
+       QCOMPARE(true,abs(answer)-abs(testClass.GetDegree())<0.0001);
+        //QCOMPARE(1,qFloatDistance(answer, testClass.GetDegree()));
     }
 
      void testtcomplex:: GetDegree2() {
         TComplex testClass =  TComplex(0, -3);
         double answer = -90;
-       QCOMPARE(true,qFloatDistance(answer, testClass.GetDegree())<(1<<8));
+       QCOMPARE(true,qFuzzyCompare(answer, testClass.GetDegree()));
     }
 
      void testtcomplex:: Pow1() {
@@ -121,19 +122,20 @@ void testtcomplex:: Init1() {
         testClass = testClass.Pwr(5);
         QString output = "0 + i * -243";
         QCOMPARE(output, testClass.ToString());
+
     }
 
      void testtcomplex:: Root1() {
         TComplex testClass =  TComplex(3, 4);
         testClass = testClass.Root(5, 3);
-        QString output = "-0.353 + i * 1.334";
+        QString output = "-0.353054 + i * 1.33379";
         QCOMPARE(output, testClass.ToString());
     }
 
      void testtcomplex:: Root2() {
         TComplex testClass =  TComplex(16, -2);
         testClass = testClass.Root(10, 4);
-        QString output = "-0.301 + i * 1.286";
+        QString output = "-0.301021 + i * 1.28576";
         QCOMPARE(output, testClass.ToString());
     }
 

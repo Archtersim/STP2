@@ -3,6 +3,11 @@
 #include <QTest>
 
 
+testtpnumbereditor::testtpnumbereditor(QObject *parent) :
+    QObject(parent)
+{
+
+}
 
 
 
@@ -56,11 +61,9 @@ void testtpnumbereditor:: Init7() {
   QCOMPARE(Output, edit.number);
 }
 void testtpnumbereditor:: Init8() {
-   PNumberEditor edit =  PNumberEditor(0.0f, 16, 5);
-   QString Input = "-01.03";
-   edit.number = Input;
+   PNumberEditor edit =  PNumberEditor("-01.03", 16, 5);
    QString Output = "-1.03";
-  QCOMPARE(Output, edit.number);
+  QCOMPARE(Output, edit.ToString());
 }
 void testtpnumbereditor:: Init9() {
    PNumberEditor edit =  PNumberEditor(0.0f, 16, 5);
@@ -93,7 +96,7 @@ void testtpnumbereditor:: AddDeleteTest2() {
    PNumberEditor testClass =  PNumberEditor(0.0f, 16, 5);
    for (int i = 0; i < 16; ++i)
        testClass.AddNumber(i);
-   QString result = "123456789ABCDEF";
+   QString result = "12345";
   QCOMPARE(result, testClass.ToString());
 }
 
